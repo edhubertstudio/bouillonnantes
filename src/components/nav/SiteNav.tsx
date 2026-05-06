@@ -1,0 +1,109 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const links = [
+  { href: "/pourquoi", label: "Pourquoi" },
+  { href: "/notre-gamme", label: "Notre Gamme" },
+  { href: "/ou-nous-trouver", label: "Où Nous Trouver" },
+  { href: "/recettes", label: "Recettes" },
+  { href: "/notre-histoire", label: "Notre Histoire" },
+];
+
+export function SiteNav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <>
+      <nav
+        role="navigation"
+        aria-label="Navigation principale"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          transition: "background 0.2s, border-color 0.2s",
+          background: scrolled ? "rgba(24,12,4,0.92)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(255,144,33,0.1)" : "1px solid transparent",
+        }}
+      >
+        <div
+          style={{ maxWidth: 1152, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}
+        >
+          {/* Logo */}
+          <Link href="/" style={{ fontFamily: "'Cormorant Garant', serif", color: "#fdf6ee", fontSize: 22, fontWeight: 600, textDecoration: "none", letterSpacing: "0.02em" }}>
+            Bouillonnantes
+          </Link>
+
+          {/* Desktop links */}
+          <div style={{ display: "flex", gap: 32, alignItems: "center" }} className="hidden md:flex">
+            {links.map((l) => (
+              <Link key={l.href} href={l.href} style={{ color: "rgba(253,246,238,0.75)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, textDecoration: "none" }}>
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* CTA + hamburger */}
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <Link
+              href="/devenir-revendeur"
+              style={{ background: "#ff9021", color: "#180c04", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, padding: "10px 20px", textDecoration: "none", letterSpacing: "0.05em", textTransform: "uppercase" }}
+              className="hidden md:block"
+            >
+              Devenir Revendeur
+            </Link>
+            <button
+              aria-label="Menu"
+              aria-expanded={open}
+              onClick={() => setOpen(!open)}
+              style={{ background: "none", border: "none", cursor: "pointer", padding: 8, color: "#fdf6ee" }}
+              className="flex md:hidden flex-col gap-[5px]"
+            >
+              <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", transition: "transform 0.2s", transform: open ? "rotate(45deg) translate(5px,5px)" : "none" }} />
+              <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", opacity: open ? 0 : 1, transition: "opacity 0.2s" }} />
+              <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", transition: "transform 0.2s", transform: open ? "rotate(-45deg) translate(5px,-5px)" : "none" }} />
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile overlay */}
+      {open && (
+        <div
+          style={{ position: "fixed", inset: 0, zIndex: 40, background: "#180c04", display: "flex", flexDirection: "column", padding: "96px 32px 32px" }}
+          className="md:hidden"
+        >
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              style={{ color: "#fdf6ee", fontFamily: "'DM Sans', sans-serif", fontSize: 22, textDecoration: "none", padding: "16px 0", borderBottom: "1px solid rgba(255,144,33,0.1)" }}
+            >
+              {l.label}
+            </Link>
+          ))}
+          <Link
+            href="/devenir-revendeur"
+            onClick={() => setOpen(false)}
+            style={{ marginTop: "auto", background: "#ff9021", color: "#180c04", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 14, padding: "18px", textDecoration: "none", textAlign: "center", letterSpacing: "0.05em", textTransform: "uppercase" }}
+          >
+            Devenir Revendeur
+          </Link>
+        </div>
+      )}
+    </>
+  );
+}

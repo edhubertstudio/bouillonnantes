@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { SiteNav } from "@/components/nav/SiteNav";
+import { Footer } from "@/components/ui/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,7 +24,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-screen flex flex-col">
+          <SiteNav />
+          <div style={{ paddingTop: 64, flex: 1, display: "flex", flexDirection: "column" }}>{children}</div>
+          <Footer />
+        </body>
     </html>
   );
 }

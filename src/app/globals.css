@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --color-amber: #ff9021;
+  --color-amber-dark: #cc7010;
+  --color-cream: #fdf6ee;
+  --color-broth: #2c1810;
+  --color-terracotta: #c4623a;
+  --color-surface: #fff8f2;
+  --color-muted: #8c6a55;
+  --color-base: #180c04;
+  --color-base-alt: #1c0e06;
+}
+
 body {
   background: #180c04;
   color: #fdf6ee;
