@@ -90,17 +90,16 @@ export default {
       return json({ error: "Network error reaching Brevo" }, 502);
     }
 
-    const brevoStatus = brevoRes.status;
+    if (brevoRes.ok) {
+      return json({ success: true });
+    }
+
     let brevoBody = "";
     try { brevoBody = await brevoRes.text(); } catch { /* ignore */ }
-
-    if (brevoRes.ok) {
-      return json({ success: true, _debug: { status: brevoStatus, body: brevoBody } });
-    }
 
     let errorMessage = "Subscription failed";
     try { errorMessage = JSON.parse(brevoBody)?.message ?? errorMessage; } catch { /* ignore */ }
 
-    return json({ error: errorMessage, _debug: { status: brevoStatus, body: brevoBody } }, brevoStatus);
+    return json({ error: errorMessage }, brevoRes.status);
   },
 };
