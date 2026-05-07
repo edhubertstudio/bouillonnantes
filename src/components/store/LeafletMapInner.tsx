@@ -20,7 +20,10 @@ export function LeafletMapInner({ stores }: LeafletMapInnerProps) {
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
 
+    let cancelled = false;
+
     import("leaflet").then((leaflet) => {
+      if (cancelled || !mapRef.current) return;
       L = leaflet.default;
 
       // Fix default marker icons broken by webpack/turbopack
@@ -61,6 +64,7 @@ export function LeafletMapInner({ stores }: LeafletMapInnerProps) {
     });
 
     return () => {
+      cancelled = true;
       mapInstanceRef.current?.remove();
       mapInstanceRef.current = null;
     };

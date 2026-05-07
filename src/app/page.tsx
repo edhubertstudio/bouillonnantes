@@ -4,6 +4,7 @@ import { FactStrip } from "@/components/ui/FactStrip";
 import { ProductCard } from "@/components/product/ProductCard";
 import { RecipeCard } from "@/components/recipe/RecipeCard";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 import { products } from "@/data/products";
 import { recipes } from "@/data/recipes";
 
@@ -349,6 +350,37 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* ── Newsletter ───────────────────────────────────────── */}
+      <section style={{ background: "#180c04", padding: "88px 24px", borderTop: "1px solid rgba(255,144,33,0.08)" }}>
+        <RevealOnScroll style={{ maxWidth: 480, margin: "0 auto", textAlign: "center" }}>
+          <p
+            style={{
+              color: "#ff9021",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.22em",
+              marginBottom: 14,
+            }}
+          >
+            Restez informé
+          </p>
+          <h2
+            style={{
+              fontFamily: "'Cormorant Garant', serif",
+              color: "#fdf6ee",
+              fontSize: "clamp(28px, 4vw, 44px)",
+              fontWeight: 600,
+              lineHeight: 1.1,
+              marginBottom: 32,
+            }}
+          >
+            Recettes et nouveautés, directement dans votre boîte mail
+          </h2>
+          <NewsletterForm variant="full" />
+        </RevealOnScroll>
       </section>
 
       {/* ── CTA — solid amber ─────────────────────────────────── */}

@@ -153,6 +153,67 @@ export default function MentionsLegalesPage() {
           </p>
         </section>
 
+        <section style={{ marginBottom: 48 }}>
+          <h2
+            style={{
+              fontFamily: "'Cormorant Garant', serif",
+              color: "#fdf6ee",
+              fontSize: 26,
+              fontWeight: 600,
+              marginBottom: 16,
+            }}
+          >
+            Newsletter
+          </h2>
+          <p
+            style={{
+              color: "rgba(253,246,238,0.65)",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 15,
+              lineHeight: 1.8,
+              marginBottom: 12,
+            }}
+          >
+            En vous inscrivant à la newsletter Bouillonnantes, votre adresse email est transmise à
+            Brevo (Sendinblue SAS, 55 rue d&apos;Amsterdam, 75008 Paris), notre prestataire d&apos;envoi
+            d&apos;emails. Elle est utilisée exclusivement pour vous envoyer les communications auxquelles
+            vous avez souscrit (actualités du projet, recettes). Elle n&apos;est pas revendue ni
+            transmise à des tiers.
+          </p>
+          <p
+            style={{
+              color: "rgba(253,246,238,0.65)",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 15,
+              lineHeight: 1.8,
+              marginBottom: 12,
+            }}
+          >
+            Votre inscription est soumise à un double opt-in : vous recevrez un email de confirmation
+            et ne serez ajouté(e) à notre liste qu&apos;après avoir cliqué sur le lien de validation.
+            Vous pouvez vous désabonner à tout moment via le lien présent dans chaque email.
+          </p>
+          <p
+            style={{
+              color: "rgba(253,246,238,0.65)",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 15,
+              lineHeight: 1.8,
+            }}
+          >
+            Pour en savoir plus sur la gestion de vos données par Brevo :{" "}
+            <a
+              href="https://www.brevo.com/fr/legal/privacypolicy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#ff9021", textDecoration: "none" }}
+            >
+              politique de confidentialité de Brevo
+            </a>
+            .
+          </p>
+        </section>
+
         <section>
           <h2
             style={{

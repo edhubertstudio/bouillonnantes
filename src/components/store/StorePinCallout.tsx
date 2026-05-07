@@ -16,7 +16,7 @@ export function StorePinCallout({ store, onClose }: StorePinCalloutProps) {
     ref.current?.focus();
   }, [store.id]);
 
-  const mapsUrl = `geo:${store.lat},${store.lng}?q=${encodeURIComponent(store.address)}`;
+  const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${store.lat},${store.lng}`;
 
   return (
     <div
@@ -86,6 +86,8 @@ export function StorePinCallout({ store, onClose }: StorePinCalloutProps) {
       </p>
       <a
         href={mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         style={{
           color: "#ff9021",
           fontFamily: "'DM Sans', sans-serif",
