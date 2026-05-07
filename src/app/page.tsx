@@ -150,17 +150,6 @@ export default function HomePage() {
             gap: 10,
           }}
         >
-          <span
-            style={{
-              color: "rgba(253,246,238,0.3)",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 10,
-              textTransform: "uppercase",
-              letterSpacing: "0.22em",
-            }}
-          >
-            Défiler
-          </span>
           <div
             style={{
               width: 1,
