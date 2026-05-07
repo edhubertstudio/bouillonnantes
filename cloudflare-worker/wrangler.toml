@@ -1,11 +1,22 @@
 name = "bouillonnantes-newsletter"
 main = "newsletter.js"
-compatibility_date = "2025-01-01"
+compatibility_date = "2026-05-07"
 
 [vars]
 # Comma-separated numeric Brevo list IDs that this Worker accepts.
 # Update with real IDs from Brevo dashboard → Contacts → Lists.
 ALLOWED_LIST_IDS = "2,3"
 
+# Space-separated origins allowed to call this Worker.
+# Ajouter l'URL du site principal après le premier deploy :
+#   https://bouillonnantes.<account>.workers.dev  ou le domaine custom
+ALLOWED_ORIGINS = "https://edhubertstudio.github.io"
+
+# Recipient address for /contact revendeur enquiries.
+CONTACT_TO_EMAIL = "edhubertstudio@gmail.com"
+
+# Verified Brevo sender address (must be verified in Brevo → Senders).
+CONTACT_FROM_EMAIL = "edhubertstudio@gmail.com"
+
 # BREVO_API_KEY is a secret — never put it here.
-# Set it once with:  npx wrangler secret put BREVO_API_KEY
+# Set it once with:  npx wrangler secret put BREVO_API_KEY --config wrangler.toml

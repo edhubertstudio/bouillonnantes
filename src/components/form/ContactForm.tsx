@@ -50,13 +50,13 @@ export function ContactForm() {
     setState("submitting");
     try {
       const res = await fetch(
-        `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`,
+        `${process.env.NEXT_PUBLIC_BREVO_WORKER_URL}/contact`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
             nom: values.nom,
-            "nom-boutique": values.boutique,
+            boutique: values.boutique,
             email: values.email,
             message: values.message,
           }),

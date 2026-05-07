@@ -92,7 +92,7 @@ export function NewsletterForm({ variant }: NewsletterFormProps) {
 
     setStatus("submitting");
     try {
-      const res = await fetch(workerUrl ?? "", {
+      const res = await fetch(`${workerUrl}/newsletter`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim(), listIds }),
