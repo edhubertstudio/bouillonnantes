@@ -1,9 +1,12 @@
 const facts = [
-  { number: "16", label: "boutiques" },
-  { number: "3", label: "références" },
-  { number: "100%", label: "bio" },
-  { number: "2", label: "fondatrices" },
+  "16 boutiques à Nantes",
+  "3 références artisanales",
+  "100% bio certifié",
+  "2 fondatrices passionnées",
 ];
+
+// Duplicate for seamless loop
+const items = [...facts, ...facts];
 
 export function FactStrip() {
   return (
@@ -11,46 +14,56 @@ export function FactStrip() {
       style={{
         borderTop: "1px solid rgba(255,144,33,0.15)",
         borderBottom: "1px solid rgba(255,144,33,0.1)",
-        padding: "40px 24px",
         background: "#1c0e06",
+        overflow: "hidden",
+        padding: "18px 0",
       }}
     >
+      <style>{`
+        @keyframes ticker {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .fact-strip-track { animation-play-state: paused !important; }
+        }
+      `}</style>
+
       <div
+        className="fact-strip-track"
         style={{
-          maxWidth: 720,
-          margin: "0 auto",
           display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "32px 48px",
+          whiteSpace: "nowrap",
+          animation: "ticker 28s linear infinite",
+          width: "max-content",
         }}
       >
-        {facts.map(({ number, label }) => (
-          <div key={label} style={{ textAlign: "center", minWidth: 80 }}>
-            <p
+        {items.map((fact, i) => (
+          <span
+            key={i}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 12,
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              color: "rgba(253,246,238,0.55)",
+              paddingRight: 48,
+            }}
+          >
+            <span
+              aria-hidden="true"
               style={{
                 color: "#ff9021",
-                fontFamily: "'Cormorant Garant', serif",
-                fontSize: 36,
-                fontWeight: 600,
-                lineHeight: 1,
+                marginRight: 16,
+                fontSize: 8,
               }}
             >
-              {number}
-            </p>
-            <p
-              style={{
-                color: "rgba(253,246,238,0.65)",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                marginTop: 6,
-              }}
-            >
-              {label}
-            </p>
-          </div>
+              ✦
+            </span>
+            {fact}
+          </span>
         ))}
       </div>
     </section>
