@@ -171,7 +171,7 @@ export function NewsletterForm({ variant }: NewsletterFormProps) {
             lineHeight: 1.6,
           }}
         >
-          Vérifiez votre boîte mail pour confirmer votre inscription.
+          Vérifiez votre boîte de {email.trim()} pour confirmer votre inscription.
         </p>
       </div>
     );
