@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Product } from "@/data/products";
 
 interface ProductCardProps {
@@ -144,7 +145,7 @@ export function ProductCard({ product, variant }: ProductCardProps) {
           </ul>
         )}
 
-        <a
+        <Link
           href="/notre-gamme"
           aria-label={`Découvrir ${product.name}`}
           style={{
@@ -161,7 +162,7 @@ export function ProductCard({ product, variant }: ProductCardProps) {
           }}
         >
           Découvrir →
-        </a>
+        </Link>
       </div>
     </article>
   );
