@@ -48,7 +48,7 @@ export function NewsletterForm({ variant }: NewsletterFormProps) {
 
   // Restore focus to container on step change (accessibility)
   useEffect(() => {
-    if (!fading) containerRef.current?.focus();
+    if (!fading) containerRef.current?.focus({ preventScroll: true });
   }, [step, fading]);
 
   function validateEmail(value: string): string | null {
