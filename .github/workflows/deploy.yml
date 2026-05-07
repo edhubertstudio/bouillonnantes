@@ -27,6 +27,10 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run build
+        env:
+          NEXT_PUBLIC_BREVO_WORKER_URL: https://bouillonnantes-newsletter.edhubertstudio.workers.dev
+          NEXT_PUBLIC_BREVO_LIST_ACTUALITES: 2
+          NEXT_PUBLIC_BREVO_LIST_RECETTES: 3
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
