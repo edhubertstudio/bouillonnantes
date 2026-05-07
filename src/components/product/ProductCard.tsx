@@ -145,24 +145,26 @@ export function ProductCard({ product, variant }: ProductCardProps) {
           </ul>
         )}
 
-        <Link
-          href="/notre-gamme"
-          aria-label={`Découvrir ${product.name}`}
-          style={{
-            color: "#ff9021",
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: 13,
-            fontWeight: 600,
-            textDecoration: "none",
-            borderBottom: "1px solid rgba(255,144,33,0.35)",
-            paddingBottom: 2,
-            alignSelf: "flex-start",
-            marginTop: "auto",
-            letterSpacing: "0.03em",
-          }}
-        >
-          Découvrir →
-        </Link>
+        {isCompact && (
+          <Link
+            href="/notre-gamme"
+            aria-label={`Découvrir ${product.name}`}
+            style={{
+              color: "#ff9021",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 13,
+              fontWeight: 600,
+              textDecoration: "none",
+              borderBottom: "1px solid rgba(255,144,33,0.35)",
+              paddingBottom: 2,
+              alignSelf: "flex-start",
+              marginTop: "auto",
+              letterSpacing: "0.03em",
+            }}
+          >
+            Découvrir →
+          </Link>
+        )}
       </div>
     </article>
   );
