@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ProductCard } from "@/components/product/ProductCard";
 import { products } from "@/data/products";
 
@@ -36,12 +37,12 @@ export default function NotreGammePage() {
         <p style={{ color: "rgba(253,246,238,0.6)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, marginBottom: 20 }}>
           Trouvez nos bouillons dans 16 boutiques partenaires à Nantes
         </p>
-        <a
+        <Link
           href="/ou-nous-trouver"
           style={{ background: "#ff9021", color: "#180c04", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, padding: "14px 32px", textDecoration: "none", letterSpacing: "0.05em", textTransform: "uppercase", display: "inline-block" }}
         >
           Où nous trouver
-        </a>
+        </Link>
       </section>
     </main>
   );
