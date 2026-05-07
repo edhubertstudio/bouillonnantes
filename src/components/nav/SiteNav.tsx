@@ -15,12 +15,24 @@ const links = [
 export function SiteNav() {
   const [scrolled, setScrolled]     = useState(false);
   const [open, setOpen]             = useState(false);
+  const [isMobile, setIsMobile]     = useState(false);
   const pathname                    = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+      if (!e.matches) setOpen(false);
+    };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
   }, []);
 
   return (
@@ -84,66 +96,78 @@ export function SiteNav() {
           </Link>
 
           {/* Desktop links */}
-          <div style={{ display: "flex", gap: 32, alignItems: "center" }} className="hidden md:flex">
-            {links.map((l) => {
-              const isActive = pathname === l.href || pathname.startsWith(l.href + "/");
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={isActive ? "nav-link-active" : undefined}
-                  style={{
-                    color: isActive ? "#fdf6ee" : "rgba(253,246,238,0.65)",
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 14,
-                    textDecoration: "none",
-                    transition: "color 0.2s",
-                    position: "relative",
-                    paddingBottom: 4,
-                  }}
-                >
-                  {l.label}
-                </Link>
-              );
-            })}
-          </div>
+          {!isMobile && (
+            <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
+              {links.map((l) => {
+                const isActive = pathname === l.href || pathname.startsWith(l.href + "/");
+                return (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    className={isActive ? "nav-link-active" : undefined}
+                    style={{
+                      color: isActive ? "#fdf6ee" : "rgba(253,246,238,0.65)",
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 14,
+                      textDecoration: "none",
+                      transition: "color 0.2s",
+                      position: "relative",
+                      paddingBottom: 4,
+                    }}
+                  >
+                    {l.label}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
 
           {/* CTA + hamburger */}
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <Link
-              href="/devenir-revendeur"
-              style={{
-                background: "#ff9021",
-                color: "#180c04",
-                fontFamily: "'DM Sans', sans-serif",
-                fontWeight: 700,
-                fontSize: 12,
-                padding: "10px 22px",
-                textDecoration: "none",
-                letterSpacing: "0.07em",
-                textTransform: "uppercase",
-              }}
-              className="hidden md:block"
-            >
-              Devenir Revendeur
-            </Link>
-            <button
-              aria-label="Menu"
-              aria-expanded={open}
-              onClick={() => setOpen(!open)}
-              style={{ background: "none", border: "none", cursor: "pointer", padding: 8, color: "#fdf6ee" }}
-              className="flex md:hidden flex-col gap-[5px]"
-            >
-              <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", transition: "transform 0.25s", transform: open ? "rotate(45deg) translate(5px,5px)" : "none" }} />
-              <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", opacity: open ? 0 : 1, transition: "opacity 0.2s" }} />
-              <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", transition: "transform 0.25s", transform: open ? "rotate(-45deg) translate(5px,-5px)" : "none" }} />
-            </button>
+            {!isMobile && (
+              <Link
+                href="/devenir-revendeur"
+                style={{
+                  background: "#ff9021",
+                  color: "#180c04",
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 12,
+                  padding: "10px 22px",
+                  textDecoration: "none",
+                  letterSpacing: "0.07em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Devenir Revendeur
+              </Link>
+            )}
+            {isMobile && (
+              <button
+                aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-expanded={open}
+                onClick={() => setOpen(!open)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: 8,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 5,
+                }}
+              >
+                <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", transition: "transform 0.25s", transform: open ? "rotate(45deg) translate(5px,5px)" : "none" }} />
+                <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", opacity: open ? 0 : 1, transition: "opacity 0.2s" }} />
+                <span style={{ display: "block", width: 22, height: 2, background: "#fdf6ee", transition: "transform 0.25s", transform: open ? "rotate(-45deg) translate(5px,-5px)" : "none" }} />
+              </button>
+            )}
           </div>
         </div>
       </nav>
 
       {/* Mobile overlay */}
-      {open && (
+      {isMobile && open && (
         <div
           style={{
             position: "fixed",
@@ -154,7 +178,6 @@ export function SiteNav() {
             flexDirection: "column",
             padding: "96px 32px 40px",
           }}
-          className="md:hidden"
         >
           {links.map((l) => {
             const isActive = pathname === l.href || pathname.startsWith(l.href + "/");

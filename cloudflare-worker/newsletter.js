@@ -69,10 +69,10 @@ export default {
       return json({ error: "Invalid list selection" }, 400);
     }
 
-    // Call Brevo
+    // Call Brevo — double opt-in confirmation flow
     let brevoRes;
     try {
-      brevoRes = await fetch("https://api.brevo.com/v3/contacts", {
+      brevoRes = await fetch("https://api.brevo.com/v3/contacts/doubleOptinConfirmation", {
         method: "POST",
         headers: {
           "api-key": env.BREVO_API_KEY,
@@ -81,8 +81,9 @@ export default {
         },
         body: JSON.stringify({
           email: email.trim(),
-          listIds: listIds.map(Number),
-          updateEnabled: true,
+          includeListIds: listIds.map(Number),
+          templateId: Number(env.BREVO_DOI_TEMPLATE_ID ?? 2),
+          redirectionUrl: "https://edhubertstudio.github.io/bouillonnantes/",
         }),
       });
     } catch {
