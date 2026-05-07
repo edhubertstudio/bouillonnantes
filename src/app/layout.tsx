@@ -4,6 +4,7 @@ import { Footer } from "@/components/ui/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
   metadataBase: new URL("https://bouillonnantes.github.io/bouillonnantes"),
   title: {
     default: "Bouillonnantes — Bouillons d'os artisanaux à Nantes",
